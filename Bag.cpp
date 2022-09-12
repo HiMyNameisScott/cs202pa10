@@ -44,13 +44,28 @@
     /// @return true if one copy was removed; false if nothing removed.
     bool Bag::erase_one(const value_type& target)
     {
-        value_type keep = 0;
-        
-        for (int i = 0; i < target ; i++){
-            //figure out how to remove a single dupe
-            
+        value_type index;
+        value_type count = 0;
+        bool found = false;
+
+        while (count < used && found == false){
+            if (data[count] == target){
+                index = count;
+                found = true;
+            };
+            count++;
+        };
+
+        if (found == true){
+            data[count] == data[used];
+            used --;
+            std::cout << "We have removed an index." << '\n';
+        } else {
+            std::cout << "We have not removed an index." << '\n';
         }
-        return 0;
+
+
+        return found;
     };
 	
     /// After this call, size() returns zero.
@@ -88,7 +103,10 @@
     {
         std::cout << '{';
         for (int i = 0 ; i < used ; i++){
-            std::cout << i << ",";
+            std::cout << data[i];
+            if (i < used - 1){
+                std::cout << ",";
+            };
         };
         std::cout << '}' << '\n';
     };

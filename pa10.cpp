@@ -29,8 +29,14 @@ int main(){
     testBag.write();
     is_bag_empty(testBag);
     testBag.clear();
-    cout << "We have cleared the bag" << endl;
     is_bag_empty(testBag);
+    testBag.insert(100);
+    
+    testBag.write();
+    
+    testBag.erase_one(100);
+
+    testBag.write();
 
     cout << "Main has ended" << endl;
     return 0;
