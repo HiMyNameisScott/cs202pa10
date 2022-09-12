@@ -14,7 +14,7 @@ using namespace std;
 
 void add_to_bag(Bag& testBag);
 void how_many_items(Bag& testBag);
-//void is_bag_empty(Bag& testBag);
+void is_bag_empty(Bag& testBag);
 
 int main(){
     
@@ -25,6 +25,12 @@ int main(){
 
     add_to_bag(testBag);
     how_many_items(testBag);
+    testBag.count(6);
+    testBag.write();
+    is_bag_empty(testBag);
+    testBag.clear();
+    cout << "We have cleared the bag" << endl;
+    is_bag_empty(testBag);
 
     cout << "Main has ended" << endl;
     return 0;
@@ -47,6 +53,13 @@ void how_many_items(Bag& testBag){
 
 };
 
-//void is_bag_empty(Bag& testBag){
-//
-//};
+void is_bag_empty(Bag& testBag){
+    bool is_empty = testBag.empty();
+
+    if (is_empty == true){
+    cout << "The bag currently does not hold any items" << '\n';
+    } else {
+        cout << "The bag currently holds items" << '\n';
+    };
+
+};

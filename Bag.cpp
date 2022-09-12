@@ -1,5 +1,5 @@
 #include "bag.h"
-using namespace std;
+#include <iostream>
 
     /// Constructs the Bag.
    Bag::Bag()
@@ -61,28 +61,34 @@ using namespace std;
         data[0];
     };
 	
-    // /// Returns the number of items equal to the target.
-    // /// @param target Key value of the item(s) to count.
-    // /// @returns Number of items with value equal to the target.
-    // Bag::size_type Bag::count(const value_type& target) const
-    // {
-    //     int count = 0;
-    //     for(int i = 0 ; i < used ; i ++){
+    /// Returns the number of items equal to the target.
+    /// @param target Key value of the item(s) to count.
+    ///@returns Number of items with value equal to the target.
+    Bag::size_type Bag::count(const value_type& target) const
+    {
+        size_type targ = target;
+        size_type count = 0;
+
+        for(size_type i = 0 ; i < used ; i ++){
             
-    //         if (i = target){
-    //             count ++;
-    //         }
+            if (i == target){
+                count ++;
+            }
             
-    //     }
+        }
 
-    //     std::cout << "The number of target items is " << count << '\n';
+        std::cout << "This number appears  " << count << " times." << '\n';
 
-    //     return 0;
-    // };
+        return count;
+    };
 
-    // /// Writes all items to an output stream in the format: {42,73,0,-59,7}
-    // /// @param output The output stream (defaults to std::cout).
-    // void Bag::write(std::ostream& output = std::cout) const
-    // {
-    //     std::cout << "check" << '\n';
-    // };
+    /// Writes all items to an output stream in the format: {42,73,0,-59,7}
+    /// @param output The output stream (defaults to std::cout).
+    void Bag::write(std::ostream& output) const
+    {
+        std::cout << '{';
+        for (int i = 0 ; i < used ; i++){
+            std::cout << i << ",";
+        };
+        std::cout << '}' << '\n';
+    };
