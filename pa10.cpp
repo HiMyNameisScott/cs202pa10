@@ -15,6 +15,7 @@ using namespace std;
 void add_to_bag(Bag& testBag);
 void how_many_items(Bag& testBag);
 void is_bag_empty(Bag& testBag);
+void insert_sixteen(Bag& testBag);
 
 int main(){
     
@@ -30,17 +31,26 @@ int main(){
     is_bag_empty(testBag);
     testBag.clear();
     is_bag_empty(testBag);
-    testBag.insert(100);
+    testBag.insert(-1);
     
     testBag.write();
     
-    testBag.erase_one(100);
+    testBag.erase_one(-1);
 
     testBag.write();
+    insert_sixteen(testBag);
+    testBag.write();
+    testBag.insert(1);
 
     cout << "Main has ended" << endl;
     return 0;
 };
+
+void insert_sixteen(Bag& testBag){
+    for (int i = 0; i < testBag.CAPACITY + 1 ; i++){
+        testBag.insert(i);
+    }
+}
 
 void add_to_bag(Bag& testBag)
 {

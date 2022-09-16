@@ -1,5 +1,6 @@
 #include "bag.h"
 #include <iostream>
+#include <cassert>
 
     /// Constructs the Bag.
    Bag::Bag()
@@ -18,13 +19,7 @@
     /// @returns true if the bag has no items, false otherwise.
     bool Bag::empty() const
     {
-        bool success = true;
-        if(used == 0){
-            std::cout << "The bag is empty!" << '\n';
-        } else {
-            success = false;
-        }
-        return success;
+       return size() == 0;
     };
 	
     /// Inserts an item into the bag.
@@ -33,8 +28,9 @@
     /// @param value Element value to insert.
     void Bag::insert(const value_type& value)
     {
-        data[used] = value;
-        used ++;
+      assert(size() < CAPACITY);
+      data[used] = value;
+      used ++;
     };
 	
     /// If target was in the bag, then one copy has been removed;
@@ -44,26 +40,15 @@
     /// @return true if one copy was removed; false if nothing removed.
     bool Bag::erase_one(const value_type& target)
     {
-        value_type index;
-        value_type count = 0;
-        bool found = false;
+       bool found = false;
 
-        while (count < used && found == false){
-            if (data[count] == target){
-                index = count;
-                found = true;
-            };
-            count++;
-        };
-
-        if (found == true){
-            data[count] == data[used];
-            used --;
-            std::cout << "We have removed an index." << '\n';
-        } else {
-            std::cout << "We have not removed an index." << '\n';
+       for (size_type i = 0 ; i < size() && !found; i++){
+        if (data[i] == target){
+            --used;
+            data[i] = data[used];
+            found = true;
         }
-
+       }
 
         return found;
     };
@@ -72,8 +57,6 @@
     void Bag::clear()
     {
         used = 0;
-        data[0] = 0;
-        data[0];
     };
 	
     /// Returns the number of items equal to the target.
@@ -81,18 +64,13 @@
     ///@returns Number of items with value equal to the target.
     Bag::size_type Bag::count(const value_type& target) const
     {
-        size_type targ = target;
-        size_type count = 0;
+       size_type count = 0;
 
-        for(size_type i = 0 ; i < used ; i ++){
-            
-            if (i == target){
-                count ++;
-            }
-            
+       for (size_type i = 0 ; i < size() ; i++){
+        if (data[i] == target){
+            count++;
         }
-
-        std::cout << "This number appears  " << count << " times." << '\n';
+       }
 
         return count;
     };
@@ -101,12 +79,12 @@
     /// @param output The output stream (defaults to std::cout).
     void Bag::write(std::ostream& output) const
     {
-        std::cout << '{';
-        for (int i = 0 ; i < used ; i++){
-            std::cout << data[i];
+        output << '{';
+        for (size_type i = 0 ; i < size() ; i++){
+            output << data[i];
             if (i < used - 1){
-                std::cout << ",";
+                output << ",";
             };
         };
-        std::cout << '}' << '\n';
+        output << '}';
     };

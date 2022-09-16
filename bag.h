@@ -58,7 +58,7 @@ public:
     /// @param output The output stream (defaults to std::cout).
     void write(std::ostream& output = std::cout) const;
 	
-private:
+protected:
     size_type  used;            ///< Number of items in Bag.
     value_type data[CAPACITY];  ///< Array of items.
 };
